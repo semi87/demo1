@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+        version="3.0">
+    <display-name>Advertisement</display-name>
+
+    <servlet>
+        <servlet-name>HomePage</servlet-name>
+        <servlet-class>board.servlets.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomePage</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>HomePage</servlet-name>
+        <url-pattern>/?</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Registration</servlet-name>
+        <servlet-class>board.servlets.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Registration</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Authorization</servlet-name>
+        <servlet-class>board.servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Authorization</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>board.servlets.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>NewAdvertisement</servlet-name>
+       <servlet-class>board.servlets.NewAdvertisementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>NewAdvertisement</servlet-name>
+       <url-pattern>/new</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+       <servlet-name>Profile</servlet-name>
+       <servlet-class>board.servlets.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>Profile</servlet-name>
+       <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>UserActiveAdvertisements</servlet-name>
+       <servlet-class>board.servlets.UserAdvertisementServlet</servlet-class>
+        <init-param>
+            <param-name>advertisements_status</param-name>
+            <param-value>active</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>UserActiveAdvertisements</servlet-name>
+       <url-pattern>/advertisements/active</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+       <servlet-name>UserFavoriteAdvertisements</servlet-name>
+       <servlet-class>board.servlets.FavoriteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>UserFavoriteAdvertisements</servlet-name>
+       <url-pattern>/advertisements/favorite</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>UserPendingAdvertisements</servlet-name>
+       <servlet-class>board.servlets.UserAdvertisementServlet</servlet-class>
+        <init-param>
+            <param-name>advertisements_status</param-name>
+            <param-value>pending</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>UserPendingAdvertisements</servlet-name>
+       <url-pattern>/advertisements/pending</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+       <servlet-name>UserInactiveAdvertisements</servlet-name>
+       <servlet-class>board.servlets.UserAdvertisementServlet</servlet-class>
+        <init-param>
+            <param-name>advertisements_status</param-name>
+            <param-value>expired</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>UserInactiveAdvertisements</servlet-name>
+       <url-pattern>/advertisements/expired</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>UserRejectedAdvertisements</servlet-name>
+       <servlet-class>board.servlets.UserAdvertisementServlet</servlet-class>
+        <init-param>
+            <param-name>advertisements_status</param-name>
+            <param-value>rejected</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>UserRejectedAdvertisements</servlet-name>
+       <url-pattern>/advertisements/rejected</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>FavoriteAdd</servlet-name>
+        <servlet-class>board.servlets.FavoriteServlet</servlet-class>
+        <init-param>
+            <param-name>favorite_action</param-name>
+            <param-value>add</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FavoriteAdd</servlet-name>
+        <url-pattern>/favorite/add</url-pattern>
+    </servlet-mapping>
+
+
+
+
+    <servlet>
+        <servlet-name>FavoriteDelete</servlet-name>
+        <servlet-class>board.servlets.FavoriteServlet</servlet-class>
+        <init-param>
+            <param-name>favorite_action</param-name>
+            <param-value>delete</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FavoriteDelete</servlet-name>
+        <url-pattern>/favorite/delete</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+    <servlet>
+       <servlet-name>AdminPendingAdvertisements</servlet-name>
+       <servlet-class>board.servlets.AdvertisementApprovalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>AdminPendingAdvertisements</servlet-name>
+       <url-pattern>/admin/approval_advertisements</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdvertisementDetail</servlet-name>
+        <servlet-class>board.servlets.AdvertisementDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdvertisementDetail</servlet-name>
+        <url-pattern>/advertisement/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ActivateAccount</servlet-name>
+        <servlet-class>board.servlets.ActivateAccountServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActivateAccount</servlet-name>
+        <url-pattern>/activate</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Category</servlet-name>
+        <servlet-class>board.servlets.CategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Category</servlet-name>
+        <url-pattern>/admin/categories</url-pattern>
+    </servlet-mapping>
+    <servlet>
+
+        <servlet-name>Users</servlet-name>
+        <servlet-class>board.servlets.UsersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+
+
+    <filter>
+        <description></description>
+        <display-name>AuthorizedFilter</display-name>
+        <filter-name>AuthorizedFilter</filter-name>
+        <filter-class>board.filters.AuthorizedFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorizedFilter</filter-name>
+        <url-pattern>/new</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/advertisements/active</url-pattern>
+        <url-pattern>/advertisements/pending</url-pattern>
+        <url-pattern>/advertisements/favorite</url-pattern>
+        <url-pattern>/advertisements/rejected</url-pattern>
+        <url-pattern>/favorite/add</url-pattern>
+        <url-pattern>/favorite/delete</url-pattern>
+        <url-pattern>/advertisements/expired</url-pattern>
+        <url-pattern>/admin/approval_advertisements</url-pattern>
+        <url-pattern>/admin/users</url-pattern>
+        <url-pattern>/admin/categories</url-pattern>
+    </filter-mapping>
+
+
+
+    <filter>
+        <description></description>
+        <display-name>AdminFilter</display-name>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>board.filters.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin/users</url-pattern>
+        <url-pattern>/admin/categories</url-pattern>
+        <url-pattern>/admin/approval_advertisements</url-pattern>
+    </filter-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.ico</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.ttf</url-pattern>
+    </servlet-mapping>
+</web-app>
