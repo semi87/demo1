@@ -35,14 +35,15 @@ public class NewAdvertisementServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session=request.getSession();
-
+        Advertisement advertisement = new Advertisement();
+        try {
         String title = request.getParameter("title");
         String short_description = request.getParameter("short_description");
         String description = request.getParameter("description");
         int category_id = Integer.parseInt(request.getParameter("category"));
 
 
-        Advertisement advertisement = new Advertisement();
+
         advertisement.setTitle(title);
         advertisement.setShort_description(short_description);
         advertisement.setDescription(description);
@@ -50,7 +51,7 @@ public class NewAdvertisementServlet extends HttpServlet {
         advertisement.setUser(new User((Long)session.getAttribute("user_id")));
         advertisement.setStatus(AdvertisementStatus.NEW);
         String expiration_date = (String) request.getParameter("expiration_date");
-        try {
+
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date myDate = (Date) formatter.parse(expiration_date);
             Date parsedDate = new java.sql.Date(myDate.getTime());
