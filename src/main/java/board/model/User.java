@@ -40,6 +40,12 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public User(long id, String name, String phone) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+    }
+
     public String getPhone() {
         return phone;
     }

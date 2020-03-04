@@ -12,7 +12,7 @@
 
 
 
-404
+<h1 style="text-align: center; width: 100%; min-height: 300px;">404 Not found</h1>
     <c:import url="parts/footer.jsp" />
 
 </div>

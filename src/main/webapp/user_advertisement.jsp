@@ -77,7 +77,14 @@
                                                 <b>Short description</b>:<div style="width: 100%;">${advertisement.short_description}</div>
                                                 <b>Description</b>:<div  style="width: 100%;">${advertisement.description}</div>
                                             </div>
-                                            <!-- Ad Desc End -->
+                                            <c:if test="${user_menu=='active'}">
+                                                <button class="btn btn-danger" style="float: right;margin: 10px;" onclick="send_disable(${advertisement.id}    )"><i class="fa fa-minus-circle"></i>
+                                                    Disable</button>
+                                            </c:if>
+
+                                            <c:if test="${user_menu!='pending'}">
+                                            <a style="float: right;margin: 10px;" class="btn btn-primary" href="${pageContext.servletContext.contextPath}/edit?advertisementId=${advertisement.id}">Edit</a>
+                                            </c:if>
                                         </div>
                                         <!-- Content Block End -->
                                     </div>
@@ -101,6 +108,20 @@
     <!-- =-=-=-=-=-=-= Ads Archives End =-=-=-=-=-=-= -->
     <c:import url="parts/footer.jsp"/>
 </div>
-<!-- Main Content Area End -->
+
+<c:if test="${user_menu=='active'}">
+<script>
+    function send_disable(advertisementId) {
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.servletContext.contextPath}/advertisements/active/disable_advertisement",
+            data: {advertisementId:advertisementId},
+            success: function () {
+                $("#adv_"+advertisementId).remove();
+            }
+        });
+    }
+</script>
+</c:if>
 </body>
 </html>

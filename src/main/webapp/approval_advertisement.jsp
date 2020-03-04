@@ -63,6 +63,8 @@
                                                 <div class="clearfix archive-history">
                                                     <div class="last-updated">${advertisement.created_date}</div>
                                                     <div class="ad-meta">
+                                                        <a class="btn save-ad" onclick="prepare_block(${advertisement.id},${advertisement.user.id},'REJECTED')"><i class="fa fa-minus-circle"></i>
+                                                            Reject</a>
                                                         <a class="btn save-ad" onclick="prepare_block(${advertisement.id},${advertisement.user.id},'BLOCKED')"><i class="fa fa-minus-circle"></i>
                                                             Block</a>
                                                         <a class="btn save-ad" onclick="send_approve(${advertisement.id},'ACTIVE');"><i class="fa fa-plus-circle"></i>
@@ -105,6 +107,7 @@
                     <div class="modal-body">
                         <textarea type="text" class="form-control" name="reason" id="reason" placeholder="Reason "></textarea>
                         <input type="hidden" name="advertisementId" id="advertisementId" value=""/>
+                        <input type="hidden" name="status" id="status" value=""/>
                         <input type="hidden" name="userId" id="userId" value=""/>
                         <div id="message"></div>
                     </div>
@@ -119,8 +122,9 @@
 
     <c:import url="parts/footer.jsp" />
     <script>
-        function prepare_block(advertisementId, userId) {
+        function prepare_block(advertisementId, userId, status) {
             $("#advertisementId").val(advertisementId);
+            $("#status").val(status);
             $("#userId").val(userId);
             $("#reason").val("");
             $('#reasonModal').modal('toggle');
@@ -142,10 +146,11 @@
             let reason = $("#reason").val();
             let advertisementId = $("#advertisementId").val();
             let userId = $("#userId").val();
+            let status = $("#status").val();
             $.ajax({
                 type: "POST",
                 url: "${pageContext.servletContext.contextPath}/admin/approval_advertisements",
-                data: {advertisementId:advertisementId, status:"BLOCKED", reason:reason, userId:userId},
+                data: {advertisementId:advertisementId, status:status, reason:reason, userId:userId},
                 success: function () {
                     $("#adv_"+advertisementId).remove();
                     $('#reasonModal').modal('toggle');

@@ -26,9 +26,13 @@ public interface AdvertisementDAO {
     List<Advertisement> getAdvertisementsByUserAndType(User user, AdvertisementStatus advertisementStatus) throws SQLException;
     List<Advertisement> getAdvertisementsByType(AdvertisementStatus advertisementStatus) throws SQLException;
     Advertisement getAdvertisementsById(Long id) throws SQLException;
+    Advertisement getAdvertisementsById_And_UserId(Long id, Long userId) throws SQLException;
     int getNumberOfRows() throws SQLException;
     int getNumberOfRows(String query) throws SQLException;
     int getNumberOfRows(int categoryId) throws SQLException;
     int getNumberOfRows(String query,int categoryId) throws SQLException;
-    boolean updateStatusById(Advertisement advertisement) throws SQLException, ExceptionHandler;
+    boolean updateStatusById(Advertisement advertisement) throws SQLException;
+    boolean updateStatusByIdAndUserId(Advertisement advertisement) throws SQLException;
+    boolean updateById(Advertisement advertisement) throws SQLException;
+
 }

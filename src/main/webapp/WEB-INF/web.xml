@@ -79,6 +79,19 @@
        <url-pattern>/advertisements/active</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+       <servlet-name>UserActiveAdvertisementsDisable_Advertisement</servlet-name>
+       <servlet-class>board.servlets.UserAdvertisementServlet</servlet-class>
+        <init-param>
+            <param-name>advertisements_status</param-name>
+            <param-value>active</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>UserActiveAdvertisementsDisable_Advertisement</servlet-name>
+       <url-pattern>/advertisements/active/disable_advertisement</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
        <servlet-name>UserFavoriteAdvertisements</servlet-name>
@@ -208,6 +221,15 @@
         <url-pattern>/admin/users</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EditAdvertisement</servlet-name>
+        <servlet-class>board.servlets.EditAdvertisementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditAdvertisement</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+
 
     <filter>
         <description></description>
@@ -220,9 +242,11 @@
         <url-pattern>/new</url-pattern>
         <url-pattern>/profile</url-pattern>
         <url-pattern>/advertisements/active</url-pattern>
+        <url-pattern>/advertisements/active/disable_advertisement</url-pattern>
         <url-pattern>/advertisements/pending</url-pattern>
         <url-pattern>/advertisements/favorite</url-pattern>
         <url-pattern>/advertisements/rejected</url-pattern>
+        <url-pattern>/edit</url-pattern>
         <url-pattern>/favorite/add</url-pattern>
         <url-pattern>/favorite/delete</url-pattern>
         <url-pattern>/advertisements/expired</url-pattern>

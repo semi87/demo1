@@ -16,28 +16,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: vmazuryk_demo1; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE vmazuryk_demo1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE vmazuryk_demo1 OWNER TO postgres;
-
-\connect vmazuryk_demo1
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -391,84 +369,79 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: advertisements; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.advertisements (id, title, description, created_date, expiration_date, status, category_id, user_id, short_description) FROM stdin;
-40	Honda Civic 2017 Sports Edition	<h3>Honda Civic 2017 Sports Edition is the best car</h3>	2020-03-03 12:21:00.284597	2020-04-04	1	2	32	Honda Civic 2017 Sports Edition
-41	Honda Civic 2018 Sports Edition	<h3>Honda Civic 2017 Sports Edition is the best car</h3>	2020-03-03 12:23:26.622059	2020-04-04	1	7	32	Honda Civic 2018 Sports Edition
-42	Honda Civic 2016 Sports Edition	<h3>Honda Civic 2017 Sports Edition is the best car</h3>	2020-03-03 12:40:18.949005	2022-07-03	1	9	32	Honda Civic 2016 Sports Edition
-43	Honda Civic 2015 Sports Edition	<h3>Honda Civic 2017 Sports Edition is the best car</h3>	2020-03-03 12:43:22.119566	2021-06-03	1	9	32	Honda Civic 2015 Sports Edition
-46	Silicone Original Case For iPhone 11 Pro Max 7 8 6 6S Plus XR XS Max	<p><strong>Product Description</strong></p><p>Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus<br />Design: Vintage,Quotes &amp; Messages,Marble,Cute,Glossy,Matte,Plain,Patterned,Exotic,Geometric,Sports,Abstract<br />Type: Fitted Case<br />Retail Package: Yes<br />Function: Dirt-resistant<br />Brand Name: KISSCASE<br />Size: Phone Case For iPhone 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX<br />Features: Fashion Macaron Silicone Phone Case For iPhone 8 7 X<br />Compatible Brand: Apple iPhones<br />Feature: Fashion Macaron Silicone Phone Case<br />Model: For Apple iPhone 5 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX</p>	2020-03-03 16:21:52.061763	2020-04-04	1	9	32	Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus
-45	Silicone Original Case For iPhone 11 Pro Max 7 8 6 6S Plus XR XS Max	<p><strong>Product Description</strong></p><p>Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus<br />Design: Vintage,Quotes &amp; Messages,Marble,Cute,Glossy,Matte,Plain,Patterned,Exotic,Geometric,Sports,Abstract<br />Type: Fitted Case<br />Retail Package: Yes<br />Function: Dirt-resistant<br />Brand Name: KISSCASE<br />Size: Phone Case For iPhone 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX<br />Features: Fashion Macaron Silicone Phone Case For iPhone 8 7 X<br />Compatible Brand: Apple iPhones<br />Feature: Fashion Macaron Silicone Phone Case<br />Model: For Apple iPhone 5 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX</p><p>&nbsp;</p>	2020-03-03 16:21:22.172351	2020-04-04	1	9	32	Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus
-\.
+INSERT INTO public.advertisements VALUES (50, 'NEW LG Q60 (LM-X525ZAW) 6.26-Inch 3GB / 64GB (GSM ONLY) Dual SIM UNLOCKED', '<h2>Item specifics</h2><p>Condition:</p><p>New:&nbsp;A brand-new, unused, unopened, undamaged item in its original packaging (where packaging is&nbsp;...&nbsp;Read more</p><p>Camera Resolution:16.0MPMPN:</p><h2>LM-X525ZAW</h2><p>Model:</p><h2>LM-X525ZAW</h2><p>Network:UnlockedOperating System:Android</p><p>Cellular Band (3G):WCDMA 850/900/1900/2100 MHzContract:Without Contract</p><p>Cellular Band (LTE):B1 / B3 / B5 / B7 / B8 / B20 / B28 / B38 / B40/B41Style:Smartphone</p><p>Storage Capacity:64GBFeatures:Dual SIM</p><p>SIM Card Slot:Dual SIMCamera (Front):13 MP</p><p>Brand:</p><h2>LG</h2><p>Camera (Rear):16 MP + 2 MP + 5 MP</p><p>Memory Card Type:MicroSDModel Number:LM-X525ZAW</p><p>Processor:Octa CoreRAM:3GB</p><p>Manufacturer Color:Moroccan Blue, Aurora BlackLock Status:Factory Unlocked</p><p>Screen Size:6.26&quot;</p>', '2020-03-04 10:16:57.32752', '2020-04-04', 1, 9, 32, 'Item specifics
+Condition:	
+New: A brand-new, unused, unopened, undamaged item in its original packaging (where packaging is ... Read more
+Camera Resolution:	16.0MP');
+INSERT INTO public.advertisements VALUES (48, 'Honda Civic 2017 Sports Edition', '<h3>Honda Civic 2017 Sports Edition is the best carffffff</h3>', '2020-03-04 04:42:56.609664', '2020-04-04', 1, 2, 32, 'Honda Civic 2017 Sports Edition');
+INSERT INTO public.advertisements VALUES (40, 'Honda Civic 2017 Sports Editionfff', '<h3>Honda Civic 2017 Sports Edition is the best carfff</h3>', '2020-03-03 12:21:00.284597', '2020-04-04', 1, 2, 32, 'Honda Civic 2017 Sports Editionffff');
+INSERT INTO public.advertisements VALUES (47, 'test', '<p>dfdsfd</p>', '2020-03-04 03:09:33.02348', '2020-04-04', 1, 7, 32, 'dfsdf');
+INSERT INTO public.advertisements VALUES (41, 'Honda Civic 2018 Sports Edition1', '<h3>Honda Civic 2017 Sports Edition is the best car</h3>', '2020-03-03 12:23:26.622059', '2020-04-03', 1, 7, 32, 'Honda Civic 2018 Sports Edition');
+INSERT INTO public.advertisements VALUES (49, 'Samsung Galaxy Note 10 ', '<h2>Item specifics</h2><p>Condition:</p><p>New:&nbsp;A brand-new, unused, unopened, undamaged item in its original packaging (where packaging is&nbsp;...&nbsp;Read more</p><p>Camera Resolution:12.0 MP+12.0 MP+12.0MP, 32.0MPLock Status:Factory UnlockedModel:</p><h2>Samsung Galaxy Note 10 Lite</h2><p>MPN:</p><h2>SM-N770</h2><p>Operating System:Android</p><p>Network:UnlockedContract:Without Contract</p><p>Storage Capacity:128 GBStyle:Smartphone</p><p>SIM Card Slot:Dual SIMCustom Bundle:No</p><p>Brand:</p><h2>Samsung</h2><p>Cellular Band:LTE (B1(2100), B2(1900), B3(1800), B4(AWS), B5(850</p><p>Memory Card Type:MicroSDConnectivity:4G</p><p>Manufacturer Warranty:Seller warranty, repaired by manufacturerFeatures:Dual SIM, 4G Data Capable, Bluetooth Enabled</p><p>Manufacturer Color:Aura Glow, Aura Black, Aura RedModel Number:SM-N770</p><p>Processor:SAMSUNG Exynos 9810RAM:8 GB</p><p>Screen Size:6.7 in</p>', '2020-03-04 10:15:51.78814', '2020-04-04', 1, 9, 32, 'Item specifics
+Condition:	
+New: A brand-new, unused, unopened, undamaged item in its original packaging (where packaging is ... Read more
+');
+INSERT INTO public.advertisements VALUES (42, 'Honda Civic 2016 Sports Edition', '<h3>Honda Civic 2017 Sports Edition is the best car</h3>', '2020-03-03 12:40:18.949005', '2022-07-03', 1, 9, 32, 'Honda Civic 2016 Sports Edition');
+INSERT INTO public.advertisements VALUES (43, 'Honda Civic 2015 Sports Edition', '<h3>Honda Civic 2017 Sports Edition is the best car</h3>', '2020-03-03 12:43:22.119566', '2021-06-03', 1, 9, 32, 'Honda Civic 2015 Sports Edition');
+INSERT INTO public.advertisements VALUES (46, 'Silicone Original Case For iPhone 11 Pro Max 7 8 6 6S Plus XR XS Max', '<p><strong>Product Description</strong></p><p>Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus<br />Design: Vintage,Quotes &amp; Messages,Marble,Cute,Glossy,Matte,Plain,Patterned,Exotic,Geometric,Sports,Abstract<br />Type: Fitted Case<br />Retail Package: Yes<br />Function: Dirt-resistant<br />Brand Name: KISSCASE<br />Size: Phone Case For iPhone 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX<br />Features: Fashion Macaron Silicone Phone Case For iPhone 8 7 X<br />Compatible Brand: Apple iPhones<br />Feature: Fashion Macaron Silicone Phone Case<br />Model: For Apple iPhone 5 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX</p>', '2020-03-03 16:21:52.061763', '2020-04-04', 1, 9, 32, 'Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus');
+INSERT INTO public.advertisements VALUES (45, 'Silicone Original Case For iPhone 11 Pro Max 7 8 6 6S Plus XR XS Max', '<p><strong>Product Description</strong></p><p>Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus<br />Design: Vintage,Quotes &amp; Messages,Marble,Cute,Glossy,Matte,Plain,Patterned,Exotic,Geometric,Sports,Abstract<br />Type: Fitted Case<br />Retail Package: Yes<br />Function: Dirt-resistant<br />Brand Name: KISSCASE<br />Size: Phone Case For iPhone 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX<br />Features: Fashion Macaron Silicone Phone Case For iPhone 8 7 X<br />Compatible Brand: Apple iPhones<br />Feature: Fashion Macaron Silicone Phone Case<br />Model: For Apple iPhone 5 6 6S 6S Plus 7 8 7 Plus 8 Plus X XS XR MAX</p><p>&nbsp;</p>', '2020-03-03 16:21:22.172351', '2020-04-04', 1, 9, 32, 'Compatible iPhone Model: iPhone XR,iPhone 6 Plus,iPhone 6,iPhone XS,iPhone 6s,iPhone XS MAX,iPhone 7,iPhone 7 Plus,iPhone X,iPhone 8,iPhone 6s plus,iPhone 8 Plus');
 
 
 --
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.categories (id, title, parent) FROM stdin;
-2	Cars	0
-7	Flowers	0
-4	house	0
-9	test category	0
-\.
+INSERT INTO public.categories VALUES (2, 'Cars', 0);
+INSERT INTO public.categories VALUES (7, 'Flowers', 0);
+INSERT INTO public.categories VALUES (4, 'house', 0);
+INSERT INTO public.categories VALUES (9, 'Phone', 0);
 
 
 --
 -- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.favorites (id, advertisement_id, user_id) FROM stdin;
-1	24	25
-\.
+INSERT INTO public.favorites VALUES (1, 24, 25);
+INSERT INTO public.favorites VALUES (4, 46, 32);
 
 
 --
 -- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.messages (mess_id, mess_author_id, mess_post_id, mes_text, mess_created_date) FROM stdin;
-\.
 
 
 --
 -- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.roles (id, description) FROM stdin;
-1	ADMIN
-2	MANAGER
-3	USER
-\.
+INSERT INTO public.roles VALUES (1, 'ADMIN');
+INSERT INTO public.roles VALUES (2, 'MANAGER');
+INSERT INTO public.roles VALUES (3, 'USER');
 
 
 --
 -- Data for Name: statuses; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.statuses (id, description) FROM stdin;
-1	NEW
-2	ACTIVE
-3	BLOCKED
-\.
+INSERT INTO public.statuses VALUES (1, 'NEW');
+INSERT INTO public.statuses VALUES (2, 'ACTIVE');
+INSERT INTO public.statuses VALUES (3, 'BLOCKED');
 
 
 --
 -- Data for Name: tokens; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.tokens (id, user_id, token) FROM stdin;
-\.
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, email, name, phone, password, role, status) FROM stdin;
-11	admin@admin.com	admin	5484	914bd955b938f2303414710fa8dfa53598d2ed6b	0	1
-12	manager@manager.com	test manager	444444	914bd955b938f2303414710fa8dfa53598d2ed6b	1	1
-32	vasja_maz@ukr.net	Test user	5211851515	914bd955b938f2303414710fa8dfa53598d2ed6b	2	1
-\.
+INSERT INTO public.users VALUES (11, 'admin@admin.com', 'admin', '5484', '914bd955b938f2303414710fa8dfa53598d2ed6b', 0, 1);
+INSERT INTO public.users VALUES (12, 'manager@manager.com', 'test manager', '444444', '914bd955b938f2303414710fa8dfa53598d2ed6b', 1, 1);
+INSERT INTO public.users VALUES (32, 'vasja_maz@ukr.net', 'Test user', '5211851515', '914bd955b938f2303414710fa8dfa53598d2ed6b', 2, 1);
 
 
 --
@@ -482,7 +455,7 @@ SELECT pg_catalog.setval('public.categories_cat_id_seq', 10, true);
 -- Name: favorits_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.favorits_id_seq', 3, true);
+SELECT pg_catalog.setval('public.favorits_id_seq', 4, true);
 
 
 --
@@ -496,7 +469,7 @@ SELECT pg_catalog.setval('public.messages_mess_id_seq', 1, false);
 -- Name: posts_post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.posts_post_id_seq', 46, true);
+SELECT pg_catalog.setval('public.posts_post_id_seq', 50, true);
 
 
 --

@@ -26,10 +26,13 @@ public class AdvertisementDaoImpl extends DBConnectionManager implements Adverti
     private final String GET_ACTIVE_ADVERTISEMENTS_COUNT_FILTERED_BY_GUERY ="SELECT COUNT(advertisements.id) FROM advertisements JOIN categories c2 on advertisements.category_id = c2.id WHERE status=? AND (advertisements.title LIKE ? OR short_description LIKE ? OR description LIKE ?)";
     private final String GET_ACTIVE_ADVERTISEMENTS_COUNT_FILTERED_BY_CATEGORY ="SELECT COUNT(advertisements.id) FROM advertisements JOIN categories c2 on advertisements.category_id = c2.id WHERE status=? AND advertisements.category_id=?";
     private final String GET_ACTIVE_ADVERTISEMENTS_COUNT_FILTERED_BY_GUERY_AND_CATEGORY ="SELECT COUNT(advertisements.id) FROM advertisements JOIN categories c2 on advertisements.category_id = c2.id WHERE status=? AND (advertisements.title LIKE ? OR short_description LIKE ? OR description LIKE ?) AND advertisements.category_id=?";
-    private final String GET_ADVERTISEMENT_BY_ID ="SELECT advertisements.id, advertisements.title, description, created_date, c2.title as category_title, c3.name as user_name, c3.phone as user_phone FROM advertisements LEFT JOIN categories c2 on advertisements.category_id = c2.id LEFT JOIN users c3 on user_id = c3.id WHERE advertisements.status=? and c3.status=? and advertisements.id=? LIMIT 1";
+    private final String GET_ACTIVE_ADVERTISEMENT_BY_ID ="SELECT advertisements.id, advertisements.title,short_description, description, created_date, c2.title as category_title, c3.name as user_name, c3.id as user_id, c3.phone as user_phone FROM advertisements LEFT JOIN categories c2 on advertisements.category_id = c2.id LEFT JOIN users c3 on user_id = c3.id WHERE advertisements.status=? and c3.status=? and advertisements.id=? LIMIT 1";
+    private final String GET_ADVERTISEMENT_BY_ID ="SELECT advertisements.id, advertisements.title,short_description, description, created_date, c2.title as category_title, c3.name as user_name, c3.id as user_id, c3.phone as user_phone FROM advertisements LEFT JOIN categories c2 on advertisements.category_id = c2.id LEFT JOIN users c3 on user_id = c3.id WHERE advertisements.user_id=? and advertisements.id=? LIMIT 1";
     private final String GET_ADVERTISEMENT_BY_USER_AND_TYPE ="SELECT advertisements.id, advertisements.title, short_description, created_date, c2.title as category_title, c3.name as user_name, c3.id as user_id, description FROM advertisements  LEFT JOIN categories c2 on advertisements.category_id = c2.id LEFT JOIN users c3 on advertisements.user_id = c3.id WHERE advertisements.status=? and c3.id=?";
     private final String GET_ADVERTISEMENT_BY_TYPE ="SELECT advertisements.id, advertisements.title, short_description, created_date, c2.title as category_title, c3.name as user_name, c3.id as user_id, description FROM advertisements  LEFT JOIN categories c2 on advertisements.category_id = c2.id LEFT JOIN users c3 on advertisements.user_id = c3.id WHERE advertisements.status=?";
     private static final String UPDATE_STATUS_BY_ID = "UPDATE advertisements SET status =? WHERE id=?";
+    private static final String UPDATE_STATUS_BY_ID_AND_USER_ID = "UPDATE advertisements SET status =? WHERE id=? AND user_id=?";
+    private static final String UPDATE_ADVERTISEMENT_BY_ID = "UPDATE advertisements SET title=?,short_description=?,description=?,expiration_date=?, status =?,category_id=? WHERE id=? AND user_id=?";
     private static final String SAVE_FAVORIT_BY_USER = "INSERT INTO favorites(advertisement_id,user_id) VALUES(?,?)";
     private static final String DELETE_FAVORIT_BY_ADVERTISEMENT_ID_AND_USER_ID = "DELETE FROM favorites  WHERE advertisement_id=? AND user_id=?";
     private final static String GET_FAVORITE_ADVERTISEMENTS ="SELECT c1.id, c1.title, short_description, created_date, c2.title as category_title, c3.name as user_name FROM favorites LEFT JOIN advertisements c1 on favorites.advertisement_id = c1.id LEFT JOIN categories c2 on c1.category_id = c2.id LEFT JOIN users c3 on c1.user_id = c3.id WHERE c1.status=? and favorites.user_id = ?";
@@ -332,7 +335,7 @@ public class AdvertisementDaoImpl extends DBConnectionManager implements Adverti
     public Advertisement getAdvertisementsById(Long id){
         Advertisement advertisement = new Advertisement();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_ADVERTISEMENT_BY_ID)){
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ACTIVE_ADVERTISEMENT_BY_ID)){
 
             preparedStatement.setInt(1, AdvertisementStatus.ACTIVE.ordinal());
             preparedStatement.setInt(2, UserStatus.ACTIVE.ordinal());
@@ -342,10 +345,36 @@ public class AdvertisementDaoImpl extends DBConnectionManager implements Adverti
                 advertisement.setId(resultSet.getLong("id"));
                 advertisement.setTitle(resultSet.getString("title"));
                 advertisement.setDescription(resultSet.getString("description"));
+                advertisement.setShort_description(resultSet.getString("short_description"));
                 advertisement.setCreated_date(resultSet.getDate("created_date"));
-                advertisement.setUser(new User(resultSet.getString("user_name"),resultSet.getString("user_phone")));
+                //advertisement.setExpire_date(resultSet.getDate("expiration_date"));
+                advertisement.setUser(new User(resultSet.getLong("user_id"),resultSet.getString("user_name"),resultSet.getString("user_phone")));
                 advertisement.setCategory(new Category(resultSet.getString("category_title")));
-                //advertisement.setCategory(resultSet.getString("title"));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            log.error(e);
+        }
+        return advertisement;
+    }
+
+    @Override
+    public Advertisement getAdvertisementsById_And_UserId(Long id, Long userId){
+        Advertisement advertisement = new Advertisement();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ADVERTISEMENT_BY_ID)){
+
+            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(2, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                advertisement.setId(resultSet.getLong("id"));
+                advertisement.setTitle(resultSet.getString("title"));
+                advertisement.setDescription(resultSet.getString("description"));
+                advertisement.setShort_description(resultSet.getString("short_description"));
+                advertisement.setCreated_date(resultSet.getDate("created_date"));
+                //advertisement.setExpire_date(resultSet.getDate("expiration_date"));
+                advertisement.setUser(new User(resultSet.getLong("user_id"),resultSet.getString("user_name"),resultSet.getString("user_phone")));
+                advertisement.setCategory(new Category(resultSet.getString("category_title")));
             }
         } catch (SQLException | ClassNotFoundException e) {
             log.error(e);
@@ -368,6 +397,51 @@ public class AdvertisementDaoImpl extends DBConnectionManager implements Adverti
         }
         catch (ClassNotFoundException e) {
             log.error("Method getUserByEmailAndPassword(): ClassNotFoundException\n", e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateStatusByIdAndUserId(Advertisement advertisement) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STATUS_BY_ID_AND_USER_ID)
+        ){
+            preparedStatement.setInt(1, advertisement.getStatus().ordinal());
+            preparedStatement.setLong(2, advertisement.getId());
+            preparedStatement.setLong(2, advertisement.getUser().getId());
+            preparedStatement.executeUpdate();
+            return true;
+        }  catch (SQLException e) {
+            log.error("Method getUserByEmailAndPassword(): Cannot read users\n", e);
+            //throw new ExceptionHandler("Cannot read users", e);
+        }
+        catch (ClassNotFoundException e) {
+            log.error("Method getUserByEmailAndPassword(): ClassNotFoundException\n", e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateById(Advertisement advertisement) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADVERTISEMENT_BY_ID)
+        ){
+            preparedStatement.setString(1, advertisement.getTitle());
+            preparedStatement.setString(2, advertisement.getShort_description());
+            preparedStatement.setString(3, advertisement.getDescription());
+            preparedStatement.setDate(4, (Date) advertisement.getExpire_date());
+            preparedStatement.setInt(5, advertisement.getStatus().ordinal());
+            preparedStatement.setLong(6, advertisement.getCategory().getId());
+            preparedStatement.setLong(7, advertisement.getId());
+            preparedStatement.setLong(8, advertisement.getUser().getId());
+            preparedStatement.executeUpdate();
+            return true;
+        }  catch (SQLException e) {
+            log.error("Method updateById(): Cannot update\n", e);
+            //throw new ExceptionHandler("Cannot read users", e);
+        }
+        catch (ClassNotFoundException e) {
+            log.error("Method updateById(): ClassNotFoundException\n", e);
         }
         return false;
     }

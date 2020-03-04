@@ -35,9 +35,13 @@ public class AdvertisementDetailServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        if(advertisementDetails.getId()!=null){
         request.setAttribute("advertisementDetails", advertisementDetails);
         request.getRequestDispatcher("/advertisement_detail.jsp")
-                .forward(request, response);
+                .forward(request, response);}else{
+            request.getRequestDispatcher("/404.jsp")
+                    .forward(request, response);
+        }
 
     }
 

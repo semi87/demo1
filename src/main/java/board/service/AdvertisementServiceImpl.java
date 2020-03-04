@@ -22,7 +22,7 @@ import java.util.Properties;
 
 public class AdvertisementServiceImpl implements AdvertisementService {
     private AdvertisementDaoImpl advertisementDao;
-    private int recordsPerPage = 10;
+    private final int recordsPerPage = 5;
 
     public AdvertisementServiceImpl() {
         super();
@@ -132,6 +132,11 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
+    public Advertisement getAdvertisementsById_And_UserId(Long id, Long userId) throws SQLException {
+        return advertisementDao.getAdvertisementsById_And_UserId(id, userId);
+    }
+
+    @Override
     public int getNumberOfRows() throws SQLException {
         return advertisementDao.getNumberOfRows();
     }
@@ -153,6 +158,12 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public boolean updateStatusById(Advertisement advertisement) throws SQLException {
         return advertisementDao.updateStatusById(advertisement);
     }
+
+    @Override
+    public boolean updateStatusByIdAndUserId(Advertisement advertisement) throws SQLException {
+        return advertisementDao.updateStatusByIdAndUserId(advertisement);
+    }
+
 
     @Override
     public boolean sendNotification(String letterBody, String email) {
@@ -177,8 +188,8 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
 
-    @Override
-    public void update(Advertisement advertisement) {
+    public boolean updateById(Advertisement advertisement) throws SQLException {
+        return advertisementDao.updateById(advertisement);
 
     }
 

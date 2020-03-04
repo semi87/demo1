@@ -90,6 +90,9 @@
                                         <!-- Content Block End -->
                                     </div>
                                 </c:forEach>
+                                <c:if test="${empty advertisementsList}">
+                                    No data
+                                </c:if>
                             </div>
                         </div>
                         <!-- Ads Archive End -->

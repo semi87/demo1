@@ -25,6 +25,7 @@ public interface AdvertisementService {
         List<Advertisement> getAdvertisementsByUserAndType(User user, AdvertisementStatus advertisementStatus) throws SQLException;
         List<Advertisement> getAdvertisementsByType(AdvertisementStatus advertisementStatus) throws SQLException;
         Advertisement getAdvertisementsById(Long id) throws SQLException;
+        Advertisement getAdvertisementsById_And_UserId(Long id, Long userId) throws SQLException;
         int getNumberOfRows() throws SQLException;
         int getNumberOfRows(String query) throws SQLException;
         int getNumberOfRows(int categoryId) throws SQLException;
@@ -33,11 +34,12 @@ public interface AdvertisementService {
 
 
         boolean updateStatusById(Advertisement advertisement) throws SQLException, ExceptionHandler;
+        boolean updateStatusByIdAndUserId(Advertisement advertisement) throws SQLException, ExceptionHandler;
 
         //update
-        void update(Advertisement advertisement);
+        boolean updateById(Advertisement advertisement) throws SQLException;
 
         //delete
-        void remove(Advertisement advertisement);
+        void remove(Advertisement advertisement) throws SQLException;
 
 }
